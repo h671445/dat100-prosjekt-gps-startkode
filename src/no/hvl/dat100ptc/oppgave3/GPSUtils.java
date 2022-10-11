@@ -1,12 +1,11 @@
 package no.hvl.dat100ptc.oppgave3;
 
 import static java.lang.Math.*;
-
 import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 
 public class GPSUtils {
-
+	
 	public static double findMax(double[] da) {
 
 		double max; 
@@ -70,11 +69,22 @@ public class GPSUtils {
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		double d;
-		double latitude1, longitude1, latitude2, longitude2;
-
+		double latitude1 = gpspoint1.getLatitude(),
+			   longitude1 = gpspoint1.getLongitude(),
+			   latitude2 = gpspoint2.getLatitude(),
+			   longitude2 = gpspoint2.getLongitude();
+		Double latDistance = toRad(latitude2-latitude1);
+		Double lonDistance = toRad(longitude2-longitude1);
+		 Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) + 
+		 Math.cos(toRad(latitude1)) * Math.cos(toRad(latitude2)) * 
+		 Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+		 Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		 d = R * c;
+		 return d;
+		
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -84,12 +94,10 @@ public class GPSUtils {
 
 		int secs;
 		double speed;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
+		double avstand = distance(gpspoint1, gpspoint2);
+		secs = gpspoint2.getTime() - gpspoint1.getTime();
+		speed = avstand / secs;
+		return speed*3.6;
 
 	}
 
@@ -97,25 +105,52 @@ public class GPSUtils {
 
 		String timestr;
 		String TIMESEP = ":";
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO - SLUTT
-
+		int S = secs % 60;
+		int H = secs / 60;
+		int M = H % 60;
+		H = H / 60;
+		String s = Integer.toString(S);
+		String m = Integer.toString(M);
+		String h = Integer.toString(H);
+		
+		if (S < 10) {
+			 s = "0" + Integer.toString(S);
+		}
+		if (M < 10) {
+			 m = "0" + Integer.toString(M);
+		}
+		if (H < 10) {
+			 h = "0" + Integer.toString(H);
+		}
+		
+		timestr = "  " + h + TIMESEP + m + TIMESEP + s;
+		
+		return timestr;
+		
+		
 	}
+		
+		
+		
+		
+
+	
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
 
 		String str;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
+		
+		double avrundet = Math.round(d*100.0)/100.0;
+		String rundet = Double.toString(avrundet);
+		str = "      " + rundet;
+		return str;
+		
 		
 	}
+	 private static Double toRad(Double value) {
+		 return value * Math.PI / 180;
 }
+}
+

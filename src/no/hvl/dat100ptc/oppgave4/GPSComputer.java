@@ -30,13 +30,11 @@ public class GPSComputer {
 	public double totalDistance() {
 
 		double distance = 0;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
-
+		for (int i = 0; i < gpspoints.length; i++) {
+			distance += GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+			
+		}
+		return distance;
 	}
 
 	// beregn totale høydemeter (i meter)
