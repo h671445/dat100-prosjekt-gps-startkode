@@ -14,7 +14,7 @@ public class GPSPoint {
 
 		// TODO - konstruktør
 		this.time = time;
-		this.latitude = latitude;
+		this.latitude = latitude; 
 		this.longitude = longitude;
 		this.elevation = elevation;
 

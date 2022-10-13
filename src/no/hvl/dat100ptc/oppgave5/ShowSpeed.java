@@ -19,7 +19,7 @@ public class ShowSpeed extends EasyGraphics {
 	private GPSPoint[] gpspoints;
 	
 	public ShowSpeed() {
-
+ 
 		String filename = JOptionPane.showInputDialog("GPS data filnavn: ");
 		gpscomputer = new GPSComputer(filename);
 
@@ -45,13 +45,31 @@ public class ShowSpeed extends EasyGraphics {
 
 		// get segments speeds from the GPS computer object		
 		double[] speeds = gpscomputer.speeds();
-
+		int gjsnt = 0;
 		int x = MARGIN,y;
+		for (int i = 0; i<gpscomputer.speeds().length; i++) {
+				Double fart = new Double(speeds[i]);
+			    int høyde = fart.intValue();
+			    
+			    gjsnt += høyde;
+				setColor(0, 0, 200);
+				drawLine( x , ybase-50 , x, -høyde +200);
+				
+				x += 2;	
+			}
+		int gjennomsnitt = gjsnt / speeds.length;
+		setColor(0, 200, 0);
+		drawLine(MARGIN, (ybase - gjennomsnitt) - 50, x,(ybase - gjennomsnitt) - 50);
+		
+		
+		}
+		
+		
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 	
 		// TODO - SLUTT
 	}
-}
+

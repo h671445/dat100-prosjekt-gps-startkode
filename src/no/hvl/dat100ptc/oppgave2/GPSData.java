@@ -15,7 +15,7 @@ public class GPSData {
 		
 	}
 
-	public GPSPoint[] getGPSPoints() {
+	public GPSPoint[] getGPSPoints() { 
 		return this.gpspoints;
 	}
 	

@@ -12,7 +12,7 @@ public class GPSDataFileReader {
 	private static  String GPSDATA_FORMAT = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,"
 			+ "provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery,annotation";
 
-	// location of GPS data files in this Eclipse project
+	// location of GPS data files in this Eclipse project 
 	private static String GPSLOGS_DIR = System.getProperty("user.dir") + "/logs/";
 
 	public static GPSData readGPSFile(String filename) {

@@ -10,7 +10,7 @@ public class GPSUtils {
 
 		double max; 
 		
-		max = da[0];
+		max = da[0]; 
 		
 		for (double d : da) {
 			if (d > max) {
