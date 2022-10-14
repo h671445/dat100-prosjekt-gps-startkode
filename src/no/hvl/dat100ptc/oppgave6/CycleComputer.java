@@ -19,7 +19,7 @@ public class CycleComputer extends EasyGraphics {
 	private static int ROUTEMAPXSIZE = 800; 
 	private static int ROUTEMAPYSIZE = 400;
 	private static int HEIGHTSIZE = 200;
-	private static int TEXTWIDTH = 200;
+	private static int TEXTWIDTH = 200; 
 
 	private GPSComputer gpscomp;
 	private GPSPoint[] gpspoints;

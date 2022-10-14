@@ -38,6 +38,7 @@ public class ShowRoute extends EasyGraphics {
 		showRouteMap(MARGIN + MAPYSIZE);
 		
 		showStatistics();
+		
 	}
 
 	// antall x-pixels per lengdegrad
@@ -71,19 +72,31 @@ public class ShowRoute extends EasyGraphics {
 		int x = 0;
 		int y = 0;
 		
+		String skaler = getText(getName());
+		
 		
 		while (i < gpspoints.length -1) {
+			pause((gpspoints[i].getTime() / Integer.parseInt(skaler)));
 			y += (int)Math.round((latitudes[i] - latitudes[i+1])* ystep());
 			x += (int)Math.round((longitudes[i] - longitudes[i+1]) * xstep());
-			if (i == gpspoints.length -2) {
-				setColor(0, 0, 255);
-			}else {
-				setColor(0, 255, 0);
-			}
-		    
-			fillCircle(50 + (x*-1) , -ybase + 1050 + y , 4);
 			
+			if (gpspoints[i].getElevation() < gpspoints[i+1].getElevation()) {
+				setColor(255, 0, 0);
+			} else if (gpspoints[i].getElevation() > gpspoints[i+1].getElevation()) {
+				setColor(0, 255, 0);
+			} else {
+				setColor(0, 0, 0);
+			}
+			String time =      (" Total time     :     " + GPSUtils.formatTime(gpspoints[i].getTime()));
+			fillCircle(50 + (x*-1) , -ybase + 1050 + y , 4);
+			setColor(0, 0, 0);
+			setFont("Courier",12);
+			
+			int nodeid = drawString(time, 0, 20);
+			System.out.println(drawString(time, 0, 20)); 
+			setVisible(nodeid, false);
 			i++;
+			
 		}
 		    
 	
@@ -107,12 +120,12 @@ public class ShowRoute extends EasyGraphics {
 		
 		
 		
-		String time = (" Total time : " + GPSUtils.formatTime(totaltime));
-		String distance = (" Total Distance : " + GPSUtils.formatDouble(totaldist) + " km");
-		String Elevation = (" Total Elevation : " + GPSUtils.formatDouble(totalelev) + " m");
-		String maxsped = (" Max Speed : " + GPSUtils.formatDouble(maxspeed) + " km/h");
-		String averageSpd = (" Average Speed : " + GPSUtils.formatDouble(avgspeed) + " km/h");
-		String enrgy = (" Energy : " + GPSUtils.formatDouble(energy) + " kcal");
+		String time =      (" Total time     :     " + GPSUtils.formatTime(totaltime));
+		String distance =  (" Total Distance : " + GPSUtils.formatDouble(totaldist) + " km");
+		String Elevation = (" Total Elevation: " + GPSUtils.formatDouble(totalelev) + " m");
+		String maxsped =   (" Max Speed      : " + GPSUtils.formatDouble(maxspeed) + " km/h");
+		String averageSpd =(" Average Speed  : " + GPSUtils.formatDouble(avgspeed) + " km/h");
+		String enrgy =     (" Energy         : " + GPSUtils.formatDouble(energy) + " kcal");
 		
 		
 		setColor(0,0,0);
